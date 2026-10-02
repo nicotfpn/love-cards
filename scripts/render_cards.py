@@ -39,6 +39,8 @@ def icon(card, kind, xy, size=35):
 
 cards=json.loads((ROOT/'src/data/cards.json').read_text())
 for i,c in enumerate(cards):
+    if c.get("photoCard"):
+        continue # These cards compose the original photograph and frame in HTML/CSS.
     photo=ImageOps.exif_transpose(Image.open(ASSETS/'photos'/c['photo'])).convert('RGBA')
     if c.get('cropBox'):
         box=c['cropBox']; photo=photo.crop(tuple(int(v*(photo.width if j%2==0 else photo.height)) for j,v in enumerate(box)))
@@ -60,7 +62,7 @@ for i,c in enumerate(cards):
         icon(card,'fairy',(652,80),43)
         if c.get('effect',{}).get('description'):
             wrap(d,(55,790),c['effect']['description'],630,28,stroke=2)
-        text(d,(50,975),'004/003',20,True,fill='white',stroke=1)
+        text(d,(50,975),f'{i+1:03}/{len(cards):03}',20,True,fill='white',stroke=1)
         d.text((166,975),'★',font=ImageFont.truetype('DejaVuSans.ttf',21),fill='#e7cc79')
     else:
         # The supplied blank includes the BASIC tab, type and V-rule graphics.
@@ -86,15 +88,17 @@ for i,c in enumerate(cards):
         icon(card,c['weakness'],(152,892),26)
         text(d,(182,891),'×2',23,True,fill='white')
         for k in range(c['retreat']):icon(card,'colorless',(556+k*30,892),26)
-        text(d,(49,957),f'{i+1:03}/003',21,True,fill='white')
+        text(d,(49,957),f'{i+1:03}/{len(cards):03}',21,True,fill='white')
         d.text((151,957),'★',font=ImageFont.truetype('DejaVuSans.ttf',21),fill='#e7cc79')
     # Mark the custom collection without touching original template credits.
     save_image(card,OUT/f"{c['id']}.png",'PNG')
     save_image(card.convert('RGB'),OUT/f"{c['id']}.webp",'WEBP',quality=92,method=6)
 
-# Review sheet, using the exact exported images.
-sheet=Image.new('RGB',(1300,520),'#17121e')
-for i,c in enumerate(cards):
+# Review sheet for raster-template cards; CSS photo cards are reviewed in-browser.
+raster_cards=[c for c in cards if not c.get('photoCard')]
+columns=min(4,len(raster_cards)); rows=(len(raster_cards)+columns-1)//columns
+sheet=Image.new('RGB',(columns*325,rows*520),'#17121e')
+for i,c in enumerate(raster_cards):
     im=Image.open(OUT/f"{c['id']}.png").convert('RGB'); im.thumbnail((305,445))
-    sheet.paste(im,(15+i*325,28))
+    sheet.paste(im,(15+(i%columns)*325,28+(i//columns)*520))
 save_image(sheet,ROOT/'docs/cards-preview.jpg','JPEG',quality=95)

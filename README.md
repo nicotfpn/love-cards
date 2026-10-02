@@ -1,6 +1,6 @@
-# Paixão — uma edição só tua
+# Paixão
 
-Revista de aniversário mobile-first para Nicole, com papel creme, títulos em vinho, fotografias coladas, um bilhete, uma entrevista respondida pelo namorado e uma página de Salem, Furrencio e Theo. No final, o botão **Booster edição especial** abre o pacote de cartas Full Art em tela cheia.
+Presente de aniversário mobile-first: papel creme, títulos em vinho e seis fotografias originais recortadas e sobrepostas. Apenas a abertura de aniversário e o botão **Booster edição especial** têm texto. Os pets aparecem exclusivamente no booster.
 
 ## Rodar e publicar
 
@@ -12,39 +12,26 @@ npm run build
 
 Vercel: framework Vite, build `npm run build`, saída `dist`. O QR Code continua apontando para a mesma URL. Sem backend ou variáveis de ambiente.
 
-## A revista
+## Composição e conteúdo
 
-A revista permite rolagem vertical. As composições aparecem uma vez ao entrar na tela; movimento reduzido mostra tudo imediatamente. As páginas usam as fotografias originais já existentes no projeto. As novas fotografias do casal, os recortes de silhueta e as respectivas cartas ainda dependem do envio dessas imagens pelo autor.
+A revista rola normalmente. As fotografias ficam visíveis desde o início, sem animações de entrada, observadores de rolagem ou efeitos de parallax. Os contornos foram traçados à mão em SVG e aplicados às fotografias por clip-path: os pixels das fotos e os rostos não são redesenhados.
 
-Textos e fotografias ficam em `src/data/magazine.json`. `moments` começa vazio para não exibir fotos fictícias nem espaços de preenchimento. Cada entrada aceita:
+As seis imagens ficam em `public/assets/photos/momento-1362.jpeg` até `momento-1367.jpeg`. Capa e colagens usam `src/data/magazine.json`; contornos usam `src/data/cutouts.json`. O campo `note` de cada fotografia está vazio: só incluir frases fornecidas pelo autor. Campos vazios não produzem legendas nem espaços reservados.
 
-```json
-{
-  "src": "/assets/photos/nos-recortados.webp",
-  "alt": "Descrição da fotografia",
-  "note": "Frase do autor",
-  "cutout": true
-}
-```
+## Booster
 
-`cutout: true` aplica uma borda de papel à imagem com transparência já preparada; não remove o fundo automaticamente. Para fotos inteiras, omita `cutout` e use `position` para ajustar o enquadramento. As fotos originais não são redesenhadas.
+A coleção tem dez cartas: Theo, Salem, Furrencio, as seis fotos novas e Nicole treinadora com cabelo rosa. As novas cartas combinam a fotografia original com a moldura Trainer já usada no projeto em HTML/CSS. A foto horizontal preserva as duas pessoas sem cortar os rostos.
 
-## O booster
+- Toque no pacote para abrir.
+- Um toque na carta avança; dois toques alternam o giro livre. Arrastar no giro não avança.
+- No teclado, Enter avança, espaço alterna inspeção e setas giram.
+- A última carta abre a coleção com miniaturas e replay. As miniaturas permitem rolagem horizontal.
+- O × ou Escape fecha a cena e restaura o ponto de leitura da revista.
+- A cena bloqueia rolagem e zoom apenas enquanto está aberta; respeita áreas seguras e movimento reduzido.
 
-- O pacote mantém as cores e a Poké Bola, sem textos estampados.
-- A cena respeita as áreas seguras e bloqueia rolagem e gestos de zoom apenas enquanto está aberta. O × ou Escape retorna à revista no ponto de leitura.
-- Um toque avança. Dois toques ativam ou desativam a rotação livre; arrastar nesse modo gira sem avançar. Cada carta nova começa de frente.
-- No teclado: Enter avança, espaço alterna inspeção e setas giram. Escape fecha a cena.
-- A última carta abre as miniaturas da coleção e o botão de reabrir. O número de cartas e a última posição são calculados pelos dados, sem limite de quatro.
-- Fechar durante uma animação cancela a sessão anterior; reabrir começa com o pacote lacrado.
+Dados em `src/data/cards.json`. `photoCard: true` usa composição em HTML/CSS; `image` aponta para a foto original, `position` ajusta o enquadramento e `layout: wide` preserva a foto horizontal. As outras cartas usam as artes de `public/assets/cards`.
 
-Dados das cartas: `src/data/cards.json`. Fotos: `public/assets/photos`. Artes: `public/assets/cards`. Cada carta pode usar `image` com o caminho de uma arte personalizada; sem esse campo, usa `/assets/cards/{id}.webp`.
-
-Para renderizar os templates existentes, com Pillow instalado:
-
-```sh
-python scripts/render_cards.py
-```
+O script `python scripts/render_cards.py` (Pillow) renderiza somente os templates em raster e sua folha de revisão; as cartas em CSS são conferidas no navegador.
 
 ## Referências e créditos
 
@@ -56,4 +43,4 @@ O código de rotação e foil é próprio. Referência visual: [Pokémon Cards C
 
 ## Verificação
 
-Build de produção com Vite e revisão visual em Chromium mobile. Rolagem e largura verificadas em 320, 390, 430, 844 e 1280 pixels. Toque simples, toque duplo, coleção, replay, retorno à revista e cancelamento durante abertura conferidos. Safari em aparelho real ainda precisa de teste.
+Build de produção e revisão visual em Chromium mobile. As dez cartas e a coleção foram percorridas. Sem erros de console ou assets ausentes. Largura conferida em 320, 390, 430, 844 e 1280 pixels. Safari em aparelho real ainda precisa de teste.

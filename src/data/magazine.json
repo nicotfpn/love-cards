@@ -1,18 +1,59 @@
 {
   "name": "Nicole",
   "nickname": "paixão",
-  "cover": { "src": "/assets/photos/nicole.jpeg", "alt": "Nicole com seu cabelo rosa", "position": "51% 38%" },
-  "note": "Eu queria te dar uma coisa que tu pudesse guardar. Aí fiz isso aqui. Um pouquinho de ti, dos nossos bichinhos e do quanto eu gosto de te chamar de paixão.",
-  "moments": [],
-  "interview": [
-    { "question": "Quem merece a capa?", "answer": "Tu. E nem teve votação." },
-    { "question": "Qual é a trilha sonora?", "answer": "Jorge Ben Jor, Djavan e tu escolhendo a próxima." },
-    { "question": "Uma coisa que eu não canso de dizer?", "answer": "Paixão. Só pra tu olhar pra mim." }
-  ],
-  "pets": [
-    { "name": "Salem", "src": "/assets/photos/salem.png", "alt": "Salem", "position": "50% 48%", "note": "Nosso tipo Dark." },
-    { "name": "Furrencio", "src": "/assets/photos/furrencio.png", "alt": "Furrencio", "position": "70% 72%", "note": "Nosso tipo Psíquico." },
-    { "name": "Theo", "src": "/assets/photos/theo.jpeg", "alt": "Theo", "position": "50% 50%", "note": "Nosso tipo Normal." }
-  ],
-  "closing": "Feliz aniversário, paixão. Eu te amo."
+  "cover": {
+    "src": "/assets/photos/momento-1362.jpeg",
+    "alt": "Nicole sorrindo de olhos fechados, com seu casaco de onça",
+    "position": "50% 34%",
+    "cutout": "1362",
+    "width": 809,
+    "height": 830
+  },
+  "moments": [
+    {
+      "src": "/assets/photos/momento-1363.jpeg",
+      "alt": "Nicole sorrindo ao ar livre",
+      "note": "",
+      "cutout": "1363",
+      "width": 817,
+      "height": 1536,
+      "layout": "portrait"
+    },
+    {
+      "src": "/assets/photos/momento-1364.jpeg",
+      "alt": "Nós dois juntos, com Nicole apoiada no meu ombro",
+      "note": "",
+      "cutout": "1364",
+      "width": 1170,
+      "height": 640,
+      "layout": "wide"
+    },
+    {
+      "src": "/assets/photos/momento-1365.jpeg",
+      "alt": "Nicole me dando um beijo no rosto enquanto eu sorrio",
+      "note": "",
+      "cutout": "1365",
+      "width": 938,
+      "height": 1569,
+      "layout": "kiss"
+    },
+    {
+      "src": "/assets/photos/momento-1366.jpeg",
+      "alt": "Nós dois abraçados em uma foto ao ar livre",
+      "note": "",
+      "cutout": "1366",
+      "width": 844,
+      "height": 1349,
+      "layout": "together"
+    },
+    {
+      "src": "/assets/photos/momento-1367.jpeg",
+      "alt": "Nicole de costas usando a camiseta com Nicolas e o número 7",
+      "note": "",
+      "cutout": "1367",
+      "width": 1030,
+      "height": 1174,
+      "layout": "jersey"
+    }
+  ]
 }

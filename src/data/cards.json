@@ -5,7 +5,10 @@
     "type": "Normal",
     "photo": "theo.jpeg",
     "frame": "colorless.png",
-    "crop": [0.5, 0.5],
+    "crop": [
+      0.5,
+      0.5
+    ],
     "hp": 180,
     "trainer": false,
     "weakness": "fighting",
@@ -14,13 +17,19 @@
       {
         "name": "Abraço de Urso",
         "damage": 60,
-        "energy": ["colorless"],
+        "energy": [
+          "colorless"
+        ],
         "effect": "Cure 30 pontos de dano deste Pokémon."
       },
       {
         "name": "Investida Carinhosa",
         "damage": 120,
-        "energy": ["colorless", "colorless", "colorless"],
+        "energy": [
+          "colorless",
+          "colorless",
+          "colorless"
+        ],
         "effect": "Este Pokémon também causa 20 pontos de dano a si mesmo."
       }
     ]
@@ -31,7 +40,10 @@
     "type": "Dark",
     "photo": "salem.png",
     "frame": "dark.png",
-    "crop": [0.5, 0.48],
+    "crop": [
+      0.5,
+      0.48
+    ],
     "hp": 170,
     "trainer": false,
     "weakness": "grass",
@@ -40,13 +52,19 @@
       {
         "name": "Passos nas Sombras",
         "damage": 40,
-        "energy": ["dark"],
+        "energy": [
+          "dark"
+        ],
         "effect": "Troque este Pokémon por 1 dos seus Pokémon no Banco."
       },
       {
         "name": "Emboscada Noturna",
         "damage": 100,
-        "energy": ["dark", "dark", "colorless"],
+        "energy": [
+          "dark",
+          "dark",
+          "colorless"
+        ],
         "effect": "O Pokémon Ativo do seu oponente agora está Confuso."
       }
     ]
@@ -57,7 +75,10 @@
     "type": "Psíquico",
     "photo": "furrencio.png",
     "frame": "psychic.png",
-    "crop": [0.7, 0.68],
+    "crop": [
+      0.7,
+      0.68
+    ],
     "hp": 170,
     "trainer": false,
     "weakness": "dark",
@@ -66,17 +87,82 @@
       {
         "name": "Olhar Hipnótico",
         "damage": 30,
-        "energy": ["psychic"],
+        "energy": [
+          "psychic"
+        ],
         "effect": "O Pokémon Ativo do seu oponente agora está Adormecido."
       },
       {
         "name": "Sintonia Psíquica",
         "damage": 110,
-        "energy": ["psychic", "psychic", "colorless"],
+        "energy": [
+          "psychic",
+          "psychic",
+          "colorless"
+        ],
         "effect": "Compre 2 cartas."
       }
     ],
-    "cropBox": [0, 0.43, 1, 1]
+    "cropBox": [
+      0,
+      0.43,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "garota-da-capa",
+    "name": "Nicole",
+    "type": "Fada",
+    "image": "/assets/photos/momento-1362.jpeg",
+    "photoCard": true,
+    "position": "50% 40%",
+    "layout": "portrait"
+  },
+  {
+    "id": "teu-sorriso",
+    "name": "Nicole",
+    "type": "Fada",
+    "image": "/assets/photos/momento-1363.jpeg",
+    "photoCard": true,
+    "position": "50% 38%",
+    "layout": "portrait"
+  },
+  {
+    "id": "nos-dois",
+    "name": "Nicole & Nicolas",
+    "type": "Dupla",
+    "image": "/assets/photos/momento-1364.jpeg",
+    "photoCard": true,
+    "position": "50% 50%",
+    "layout": "wide"
+  },
+  {
+    "id": "beijinho",
+    "name": "Nicole & Nicolas",
+    "type": "Dupla",
+    "image": "/assets/photos/momento-1365.jpeg",
+    "photoCard": true,
+    "position": "50% 68%",
+    "layout": "portrait"
+  },
+  {
+    "id": "bem-aqui",
+    "name": "Nicole & Nicolas",
+    "type": "Dupla",
+    "image": "/assets/photos/momento-1366.jpeg",
+    "photoCard": true,
+    "position": "50% 48%",
+    "layout": "portrait"
+  },
+  {
+    "id": "camisa-sete",
+    "name": "Nicole",
+    "type": "Especial",
+    "image": "/assets/photos/momento-1367.jpeg",
+    "photoCard": true,
+    "position": "50% 50%",
+    "layout": "portrait"
   },
   {
     "id": "nicole",
@@ -84,7 +170,10 @@
     "type": "Fada",
     "photo": "nicole.jpeg",
     "frame": "trainer.png",
-    "crop": [0.47, 0.5],
+    "crop": [
+      0.47,
+      0.5
+    ],
     "trainer": true,
     "effect": {
       "name": "",

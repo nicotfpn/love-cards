@@ -131,7 +131,8 @@ async function openPack() {
   await showCard();
 }
 function cardMarkup(card) {
-  return `<div class="card-enter"><div class="card ${card.id}" tabindex="0" role="button" aria-label="${card.name}. Um toque avança; dois toques ativam ou desativam a rotação. No teclado: Enter avança, espaço alterna rotação e setas giram." aria-pressed="false" aria-disabled="true"><div class="card-face front"><img src="${cardURL(card)}" alt="Carta Full Art de ${card.name}, fotografia original" draggable="false"><div class="foil" aria-hidden="true"></div><div class="glare" aria-hidden="true"></div></div><div class="card-face back"><img src="/assets/cards/back.jpg" alt="Verso Pokémon" draggable="false"><div class="glare" aria-hidden="true"></div></div></div></div>`;
+  const photoArt = card.photoCard ? `<div class="photo-print photo-print-${card.layout || 'portrait'}" style="--print-position:${card.position || '50% 50%'}"><img class="original-photo" src="${cardURL(card)}" alt="${card.name}, fotografia original" draggable="false"><div class="print-shade" aria-hidden="true"></div><img class="trainer-frame" src="/assets/frames/trainer.png" alt="" aria-hidden="true" draggable="false"><span class="print-name">${card.name}</span><span class="print-number">${String(cards.indexOf(card) + 1).padStart(3, '0')} / ${String(cards.length).padStart(3, '0')} ♡</span></div>` : `<img src="${cardURL(card)}" alt="Carta Full Art de ${card.name}, fotografia original" draggable="false">`;
+  return `<div class="card-enter"><div class="card ${card.id}" tabindex="0" role="button" aria-label="${card.name}. Um toque avança; dois toques ativam ou desativam a rotação. No teclado: Enter avança, espaço alterna rotação e setas giram." aria-pressed="false" aria-disabled="true"><div class="card-face front">${photoArt}<div class="foil" aria-hidden="true"></div><div class="glare" aria-hidden="true"></div></div><div class="card-face back"><img src="/assets/cards/back.jpg" alt="Verso Pokémon" draggable="false"><div class="glare" aria-hidden="true"></div></div></div></div>`;
 }
 async function showCard() {
   const currentSession = session;
@@ -179,7 +180,7 @@ function finish() {
   collection.innerHTML = cards
     .map(
       (c, i) =>
-        `<button data-index="${i}" aria-label="Rever ${c.name}" aria-pressed="${i === index}"><img src="${cardURL(c)}" alt="${c.name}" draggable="false"></button>`,
+        `<button data-index="${i}" aria-label="Rever ${c.name}" aria-pressed="${i === index}"><img class="${c.photoCard ? 'photo-thumb' : ''}" src="${cardURL(c)}" alt="${c.name}" draggable="false"></button>`,
     )
     .join("");
 }
