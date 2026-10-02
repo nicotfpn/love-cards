@@ -13,7 +13,7 @@
     {
       "src": "/assets/photos/momento-1363.jpeg",
       "alt": "Nicole sorrindo ao ar livre",
-      "note": "",
+      "note": "Amo te chamar de paixão. Amo a tua risada.",
       "cutout": "1363",
       "width": 817,
       "height": 1536,
@@ -22,8 +22,7 @@
     {
       "src": "/assets/photos/momento-1364.jpeg",
       "alt": "Nós dois juntos, com Nicole apoiada no meu ombro",
-      "note": "",
-      "cutout": "1364",
+      "note": "Amo deitar no teu peito e jogar conversa fora, caminhar sem rumo só pra conversar um pouco mais.",
       "width": 1170,
       "height": 640,
       "layout": "wide"
@@ -31,8 +30,7 @@
     {
       "src": "/assets/photos/momento-1365.jpeg",
       "alt": "Nicole me dando um beijo no rosto enquanto eu sorrio",
-      "note": "",
-      "cutout": "1365",
+      "note": "Amo ficar nem que seja mais dois minutos juntos, só pra olhar pra baixo e ver teu rostinho perfeito me olhando com todo o amor do mundo!",
       "width": 938,
       "height": 1569,
       "layout": "kiss"
@@ -40,8 +38,7 @@
     {
       "src": "/assets/photos/momento-1366.jpeg",
       "alt": "Nós dois abraçados em uma foto ao ar livre",
-      "note": "",
-      "cutout": "1366",
+      "note": "Obrigado por me amar, por ser quem tu é, por cuidar de mim e de todo mundo próximo a ti, e pelo esforço de todos os dias na nossa relação.",
       "width": 844,
       "height": 1349,
       "layout": "together"
@@ -49,11 +46,12 @@
     {
       "src": "/assets/photos/momento-1367.jpeg",
       "alt": "Nicole de costas usando a camiseta com Nicolas e o número 7",
-      "note": "",
-      "cutout": "1367",
+      "note": "Obrigado pelo teu beijo, pela tua calma. Eu te amo muito e te quero pra sempre!",
       "width": 1030,
       "height": 1174,
       "layout": "jersey"
     }
-  ]
+  ],
+  "closing": "Feliz aniversário, paixão!",
+  "signature": "Nico"
 }

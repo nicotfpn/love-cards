@@ -75,3 +75,33 @@ button:focus-visible { outline: 2px solid var(--wine); outline-offset: 5px; }
 @media (max-height: 580px) and (orientation: landscape) {
   .booster-dialog .card-space { width: min(38vw, calc((var(--viewport-height) - 75px) * .71965)); }
 }
+
+/* Photographs and Nico's own letter share the page without scroll effects. */
+.moments .moment { grid-column: 1 / 13; grid-row: auto; margin-top: 65px; }
+.moments .layout-portrait .pasted-photo { width: 62%; margin-left: auto; }
+.moments .layout-wide .pasted-photo { width: 100%; }
+.moments .layout-kiss .pasted-photo { width: 78%; }
+.moments .layout-together .pasted-photo { width: 79%; margin-left: auto; }
+.moments .layout-jersey .pasted-photo { width: 87%; margin: 0 auto; }
+.whole-photo { padding: 7px; background: #fffcf4; box-shadow: 3px 6px 9px #39231820; }
+.whole-photo img { height: auto; object-fit: contain; }
+.moment-note { max-width: 31ch; margin-top: 42px !important; font-size: clamp(20px, 5.3vw, 26px); line-height: 1.55; text-align: left; letter-spacing: -.02em; }
+.layout-portrait .moment-note { color: var(--wine); font-style: italic; font-size: clamp(27px, 7vw, 35px); max-width: 19ch; }
+.closing-note { color: var(--wine); font-family: Georgia, serif; font-style: italic; font-size: 28px; text-align: center; }
+.signature { color: var(--wine); font-family: Georgia, serif; font-style: italic; font-size: 25px; text-align: right; margin: 20px 18px 55px !important; }
+.card .photo-print .original-photo { position: absolute; left: 4.2%; top: 14%; width: 91.6%; height: 72%; object-fit: contain; object-position: center; }
+.photo-print { background: #30212c; }
+.photo-print .print-shade { display: none; }
+.card.nicole .foil { opacity: .36; animation: rare-foil 6s ease-in-out infinite alternate; }
+.card.nicole .card-face.front { box-shadow: 0 20px 38px #0008, 0 0 0 1px #f5d7ef, 0 0 22px #d4a4df42; }
+.rare-sweep { position: absolute; inset: -40%; pointer-events: none; background: linear-gradient(115deg, transparent 36%, #fff4dd00 42%, #fff4ddb0 49%, #e5c8ff50 53%, transparent 60%); mix-blend-mode: screen; transform: translateX(-75%); animation: rare-sweep 1.8s .2s ease-out both; }
+.rare-stars { position: absolute; inset: 0; pointer-events: none; }
+.rare-stars i { position: absolute; width: 18px; height: 18px; background: #fff7df; clip-path: polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%); opacity: 0; animation: rare-twinkle 3.8s ease-in-out infinite; }
+.rare-stars i:nth-child(1) { left: 11%; top: 25%; animation-delay: .5s; }
+.rare-stars i:nth-child(2) { right: 10%; top: 44%; animation-delay: 1.3s; width: 13px; height: 13px; }
+.rare-stars i:nth-child(3) { left: 21%; bottom: 19%; animation-delay: 2.1s; width: 11px; height: 11px; }
+.rare-stars i:nth-child(4) { right: 15%; top: 12%; animation-delay: 2.9s; }
+@keyframes rare-foil { from { background-position: 10% 30%; } to { background-position: 90% 70%; } }
+@keyframes rare-sweep { to { transform: translateX(75%); } }
+@keyframes rare-twinkle { 0%, 65%, 100% { opacity: 0; transform: scale(.4) rotate(-12deg); } 25%, 38% { opacity: .9; transform: scale(1) rotate(8deg); } }
+@media (prefers-reduced-motion: reduce) { .rare-sweep, .rare-stars { display: none; } .card.nicole .foil { animation: none; } }

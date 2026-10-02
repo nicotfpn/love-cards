@@ -1,6 +1,6 @@
 # Paixão
 
-Presente de aniversário mobile-first: papel creme, títulos em vinho e seis fotografias originais recortadas e sobrepostas. Apenas a abertura de aniversário e o botão **Booster edição especial** têm texto. Os pets aparecem exclusivamente no booster.
+Presente de aniversário mobile-first: papel creme, títulos em vinho e seis fotografias originais, com recortes apenas nos dois retratos individuais. O texto de Nico aparece entre as fotografias, com pontuação revisada e assinatura no final. Os pets aparecem exclusivamente no booster.
 
 ## Rodar e publicar
 
@@ -16,11 +16,11 @@ Vercel: framework Vite, build `npm run build`, saída `dist`. O QR Code continua
 
 A revista rola normalmente. As fotografias ficam visíveis desde o início, sem animações de entrada, observadores de rolagem ou efeitos de parallax. Os contornos foram traçados à mão em SVG e aplicados às fotografias por clip-path: os pixels das fotos e os rostos não são redesenhados.
 
-As seis imagens ficam em `public/assets/photos/momento-1362.jpeg` até `momento-1367.jpeg`. Capa e colagens usam `src/data/magazine.json`; contornos usam `src/data/cutouts.json`. O campo `note` de cada fotografia está vazio: só incluir frases fornecidas pelo autor. Campos vazios não produzem legendas nem espaços reservados.
+As seis imagens ficam em `public/assets/photos/momento-1362.jpeg` até `momento-1367.jpeg`. Capa e colagens usam `src/data/magazine.json`; contornos usam `src/data/cutouts.json`. O campo `note` de cada fotografia contém somente o texto fornecido por Nico. Campos vazios não produzem legendas nem espaços reservados.
 
 ## Booster
 
-A coleção tem dez cartas: Theo, Salem, Furrencio, as seis fotos novas e Nicole treinadora com cabelo rosa. As novas cartas combinam a fotografia original com a moldura Trainer já usada no projeto em HTML/CSS. A foto horizontal preserva as duas pessoas sem cortar os rostos.
+A coleção tem dez cartas: Theo, Salem, Furrencio, as seis fotos novas e Nicole treinadora com cabelo rosa. As novas cartas combinam a fotografia original com a moldura Trainer já usada no projeto em HTML/CSS. Todas as seis fotos novas usam enquadramento integral dentro da área livre da moldura, sem cortes ou sobreposição dos rótulos. A última carta da Nicole de cabelo rosa tem foil animado, passagem de luz ao revelar e pequenos brilhos; movimento reduzido desliga esses efeitos.
 
 - Toque no pacote para abrir.
 - Um toque na carta avança; dois toques alternam o giro livre. Arrastar no giro não avança.
