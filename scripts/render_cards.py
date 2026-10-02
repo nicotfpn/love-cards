@@ -1,4 +1,4 @@
-"""Compose original photos with PocketCards Full Art foil borders, no AI imagery."""
+"""Compose original photos with aschefield Full Art V / Supporter templates."""
 from pathlib import Path
 from io import BytesIO
 import json
@@ -44,62 +44,51 @@ for i,c in enumerate(cards):
         box=c['cropBox']; photo=photo.crop(tuple(int(v*(photo.width if j%2==0 else photo.height)) for j,v in enumerate(box)))
     # Crop only; all subjects, faces and backgrounds remain original photographs.
     card=ImageOps.fit(photo,(W,H),Image.Resampling.LANCZOS,centering=tuple(c['crop']))
-    # The newer Pocket frame is a border only. Keep its original foil artwork,
-    # but discard extracted interior remnants so nothing obscures the photo.
-    frame_name='frame-full-art.webp' if c['trainer'] else 'frame-ex-full-art.webp'
-    border=Image.open(ASSETS/'frames'/frame_name).convert('RGBA').resize((W,H),Image.Resampling.LANCZOS)
-    alpha=border.getchannel('A')
-    ImageDraw.Draw(alpha).rounded_rectangle((34,34,W-35,H-35),radius=9,fill=0)
-    border.putalpha(alpha)
+    # Authentic template from the open-source PokeCardMaker asset collection.
+    border=Image.open(ASSETS/'frames'/c['frame']).convert('RGBA').resize((W,H),Image.Resampling.LANCZOS)
+    # A soft tonal veil under the moves, rather than opaque UI panels.
+    veil=Image.new('RGBA',(W,H)); vd=ImageDraw.Draw(veil)
+    if not c['trainer']:
+        for y in range(630,1008):
+            alpha=int(min(155,max(0,(y-630)*.6)))
+            vd.line((30,y,717,y),fill=(10,15,23,alpha))
+    card.alpha_composite(veil)
     card.alpha_composite(border)
-    # Compact, translucent title and move areas retain a true full-photo field.
-    panel=Image.new('RGBA',(W,H)); pd=ImageDraw.Draw(panel)
-    pd.rectangle((35,34,711,127 if c['trainer'] else 106),fill=(255,255,255,110))
-    card.alpha_composite(panel)
     d=ImageDraw.Draw(card)
     if c['trainer']:
-        text(d,(49,37),'TREINADOR',24,True,stroke=1)
-        text(d,(696,37),'Apoiador',26,True,fill='#a82852',stroke=1,anchor='ra')
-        text(d,(49,69),'Nicole',55,True,stroke=2)
-        icon(card,'fairy',(651,77),40)
-        panel=Image.new('RGBA',(W,H)); pd=ImageDraw.Draw(panel)
-        pd.rounded_rectangle((45,750,702,914),radius=10,fill=(255,245,252,190))
-        pd.rounded_rectangle((45,934,702,981),radius=6,fill=(255,238,250,205))
-        card.alpha_composite(panel); d=ImageDraw.Draw(card)
-        text(d,(63,767),'Amor Infinito',42,True,condensed=True)
-        wrap(d,(63,825),c['effect']['description'],610,28,stroke=0)
-        wrap(d,(58,942),'Você pode jogar apenas 1 carta de Apoiador durante o seu turno.',620,21,stroke=0)
-        text(d,(49,992),'Foto · Nicolas & Nicole',18,stroke=1)
-        text(d,(698,992),'004/003 ★★',20,True,fill='#775300',stroke=1,anchor='ra')
+        text(d,(48,76),c['name'],53,True)
+        icon(card,'fairy',(652,80),43)
+        if c.get('effect',{}).get('description'):
+            wrap(d,(55,790),c['effect']['description'],630,28,stroke=2)
+        text(d,(50,975),'004/003',20,True,fill='white',stroke=1)
+        d.text((166,975),'★',font=ImageFont.truetype('DejaVuSans.ttf',21),fill='#e7cc79')
     else:
-        text(d,(48,37),'BÁSICO',20,True,stroke=1)
-        text(d,(47,58),c['name'],44,True,stroke=2)
-        ex_x=47+int(d.textlength(c['name'],font=font(44,True)))+10
-        d.text((ex_x,65),'ex',font=ImageFont.truetype(str(ASSETS/'fonts/GillSans-Italic.ttf'),38),fill='#1b2530',stroke_width=2,stroke_fill='white')
-        text(d,(538,62),'PV',19,True,stroke=1,anchor='ra')
-        text(d,(638,46),str(c['hp']),49,True,stroke=2,anchor='ra')
-        icon(card,{'Normal':'colorless','Dark':'dark','Psíquico':'psychic'}[c['type']],(654,48),43)
-        panel=Image.new('RGBA',(W,H)); pd=ImageDraw.Draw(panel)
-        pd.rounded_rectangle((40,687,706,899),radius=8,fill=(255,255,255,180))
-        pd.rectangle((40,909,706,938),fill=(255,255,255,210))
-        pd.rectangle((40,945,706,982),fill=(255,255,255,195))
-        card.alpha_composite(panel); d=ImageDraw.Draw(card)
+        # The supplied blank includes the BASIC tab, type and V-rule graphics.
+        text(d,(141,24),c['name'],48,True,fill='white',stroke=1)
+        name_width=d.textlength(c['name'],font=font(48,True))
+        v=Image.open(ASSETS/'symbols/v.png').convert('RGBA');v.thumbnail((63,48))
+        card.alpha_composite(v,(int(152+name_width),33))
+        text(d,(522,41),'HP',18,True,fill='white')
+        text(d,(646,20),str(c['hp']),53,True,fill='white',anchor='ra')
         for j,a in enumerate(c['attacks']):
-            y=698+j*101
-            for k,energy in enumerate(a['energy']):icon(card,energy,(49+k*36,y+4),32)
-            text(d,(218,y),a['name'],38,True,condensed=True)
-            text(d,(693,y),str(a['damage']),41,True,anchor='ra')
-            wrap(d,(49,y+44),a['effect'],643,25,stroke=0)
-        text(d,(49,911),'fraqueza',20)
-        icon(card,c['weakness'],(128,912),22)
-        text(d,(158,909),'×2',24,True)
-        text(d,(271,911),'resistência',20)
-        text(d,(519,911),'recuo',20)
-        for k in range(c['retreat']):icon(card,'colorless',(576+k*28,912),22)
-        text(d,(49,949),'Regra ex',22,True)
-        wrap(d,(145,949),'Quando seu Pokémon ex é Nocauteado, seu oponente pega 2 cartas de Prêmio.',549,18,stroke=0)
-        text(d,(49,992),'Foto · Nicolas & Nicole',18,stroke=1)
-        text(d,(695,992),f'{i+1:03}/003 ★★',20,True,fill='#775300',stroke=1,anchor='ra')
+            y=672+j*105
+            for k,energy in enumerate(a['energy']):icon(card,energy,(49+k*36,y+8),32)
+            # White lettering with a fine dark keyline, like Full Art V print.
+            d.text((205,y),a['name'],font=font(36,True,True),fill='white',stroke_width=2,stroke_fill='#172132')
+            d.text((690,y),str(a['damage']),font=font(40,True),fill='white',stroke_width=2,stroke_fill='#172132',anchor='ra')
+            words=a['effect'].split();line='';yy=y+46
+            for word in words:
+                trial=(line+' '+word).strip()
+                if d.textlength(trial,font=font(24))>640 and line:
+                    d.text((49,yy),line,font=font(24),fill='white',stroke_width=1,stroke_fill='#172132');yy+=26;line=word
+                else:line=trial
+            d.text((49,yy),line,font=font(24),fill='white',stroke_width=1,stroke_fill='#172132')
+        icon(card,c['weakness'],(152,892),26)
+        text(d,(182,891),'×2',23,True,fill='white')
+        for k in range(c['retreat']):icon(card,'colorless',(556+k*30,892),26)
+        text(d,(49,957),f'{i+1:03}/003',21,True,fill='white')
+        d.text((151,957),'★',font=ImageFont.truetype('DejaVuSans.ttf',21),fill='#e7cc79')
+    # Mark the custom collection without touching original template credits.
     save_image(card,OUT/f"{c['id']}.png",'PNG')
     save_image(card.convert('RGB'),OUT/f"{c['id']}.webp",'WEBP',quality=92,method=6)
 
