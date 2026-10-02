@@ -1,0 +1,129 @@
+[
+  {
+    "id": "theo",
+    "name": "Theo",
+    "type": "Normal",
+    "photo": "theo.jpeg",
+    "frame": "colorless.png",
+    "crop": [
+      0.5,
+      0.5
+    ],
+    "hp": 180,
+    "trainer": false,
+    "weakness": "fighting",
+    "retreat": 2,
+    "attacks": [
+      {
+        "name": "Abraço de Urso",
+        "damage": 60,
+        "energy": [
+          "colorless"
+        ],
+        "effect": "Cure 30 pontos de dano deste Pokémon."
+      },
+      {
+        "name": "Investida Carinhosa",
+        "damage": 120,
+        "energy": [
+          "colorless",
+          "colorless",
+          "colorless"
+        ],
+        "effect": "Este Pokémon também causa 20 pontos de dano a si mesmo."
+      }
+    ]
+  },
+  {
+    "id": "salem",
+    "name": "Salem",
+    "type": "Dark",
+    "photo": "salem.png",
+    "frame": "dark.png",
+    "crop": [
+      0.5,
+      0.48
+    ],
+    "hp": 170,
+    "trainer": false,
+    "weakness": "grass",
+    "retreat": 1,
+    "attacks": [
+      {
+        "name": "Passos nas Sombras",
+        "damage": 40,
+        "energy": [
+          "dark"
+        ],
+        "effect": "Troque este Pokémon por 1 dos seus Pokémon no Banco."
+      },
+      {
+        "name": "Emboscada Noturna",
+        "damage": 100,
+        "energy": [
+          "dark",
+          "dark",
+          "colorless"
+        ],
+        "effect": "O Pokémon Ativo do seu oponente agora está Confuso."
+      }
+    ]
+  },
+  {
+    "id": "furrencio",
+    "name": "Furrencio",
+    "type": "Psíquico",
+    "photo": "furrencio.png",
+    "frame": "psychic.png",
+    "crop": [
+      0.7,
+      0.68
+    ],
+    "hp": 170,
+    "trainer": false,
+    "weakness": "dark",
+    "retreat": 1,
+    "attacks": [
+      {
+        "name": "Olhar Hipnótico",
+        "damage": 30,
+        "energy": [
+          "psychic"
+        ],
+        "effect": "O Pokémon Ativo do seu oponente agora está Adormecido."
+      },
+      {
+        "name": "Sintonia Psíquica",
+        "damage": 110,
+        "energy": [
+          "psychic",
+          "psychic",
+          "colorless"
+        ],
+        "effect": "Compre 2 cartas."
+      }
+    ],
+    "cropBox": [
+      0,
+      0.43,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "nicole",
+    "name": "Nicole",
+    "type": "Fada",
+    "photo": "nicole.jpeg",
+    "frame": "trainer.png",
+    "crop": [
+      0.47,
+      0.5
+    ],
+    "trainer": true,
+    "effect": {
+      "name": "Amor Infinito",
+      "description": "Escolha alguém especial. Cure toda a saudade e guarde os melhores momentos para sempre."
+    }
+  }
+]
