@@ -2,6 +2,10 @@
 
 Presente de aniversário mobile-first: papel creme, títulos em vinho e seis fotografias originais, com recortes apenas nos dois retratos individuais. O texto de Nico aparece entre as fotografias, com pontuação revisada e assinatura no final. Os pets aparecem exclusivamente no booster.
 
+## Entrada pelo QR
+
+O endereço fixo é https://love-cards-mu.vercel.app/. A cada visita, um coração flutuante ocupa a tela. Um toque revela a revista; o conteúdo fica oculto até a abertura. O coração funciona por teclado e respeita movimento reduzido.
+
 ## Rodar e publicar
 
 ```sh

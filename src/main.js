@@ -6,6 +6,21 @@ import { renderMagazine } from "./magazine.js";
 
 const root = document.querySelector("#app");
 renderMagazine(root);
+const heartGate = document.querySelector(".heart-gate");
+const heartOpen = document.querySelector(".heart-open");
+heartOpen.addEventListener("click", () => {
+  heartOpen.disabled = true;
+  root.hidden = false;
+  window.scrollTo({ top: 0, behavior: "instant" });
+  heartGate.classList.add("heart-opening");
+  setTimeout(() => {
+    heartGate.remove();
+    document.body.classList.remove("heart-locked");
+    const heading = root.querySelector("h1");
+    heading.setAttribute("tabindex", "-1");
+    heading.focus({ preventScroll: true });
+  }, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 450);
+}, { once: true });
 const dialog = document.createElement("dialog");
 dialog.className = "booster-dialog";
 dialog.setAttribute("aria-label", "Booster edição especial");

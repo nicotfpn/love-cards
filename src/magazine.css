@@ -102,3 +102,14 @@ button:focus-visible { outline: 2px solid var(--wine); outline-offset: 5px; }
 
 .moments .moment { padding-left: 0; padding-right: 0; }
 @media (max-width: 350px) { .moment-note { font-size: 17px; } .layout-kiss .pasted-photo, .layout-together .pasted-photo { width: 43%; } }
+
+.heart-locked { overflow: hidden; }
+.heart-gate { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; min-height: 100svh; background: var(--paper) url('/assets/paper-grain.svg') repeat; transition: opacity .45s ease; }
+.heart-open { display: block; width: clamp(145px, 42vw, 205px); padding: 12px; border: 0; background: transparent; color: var(--wine); cursor: pointer; touch-action: manipulation; animation: heart-float 3.4s ease-in-out infinite; filter: drop-shadow(0 15px 14px #782c3a26); }
+.heart-open svg { width: 100%; display: block; transition: scale .35s ease; }
+.heart-open:active svg { scale: .94; }
+.heart-opening { opacity: 0; pointer-events: none; }
+.heart-opening .heart-open svg { scale: 1.18; }
+.cover h1:focus { outline: none; }
+@keyframes heart-float { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-13px) rotate(3deg); } }
+@media (prefers-reduced-motion: reduce) { .heart-open { animation: none; } .heart-gate, .heart-open svg { transition: none; } }
