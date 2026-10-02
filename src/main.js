@@ -1,42 +1,76 @@
 import "./styles.css";
 import cards from "./data/cards.json";
 
-const app = document.querySelector("#app");
-// This is a full-screen touch scene: gestures manipulate the pack/cards only.
+import "./magazine.css";
+import { renderMagazine } from "./magazine.js";
+
+const root = document.querySelector("#app");
+renderMagazine(root);
+const dialog = document.createElement("dialog");
+dialog.className = "booster-dialog";
+dialog.setAttribute("aria-label", "Booster edição especial");
+dialog.innerHTML = '<button class="close-booster" type="button" aria-label="Voltar à revista">×</button><div class="booster-app"></div>';
+document.body.append(dialog);
+const app = dialog.querySelector(".booster-app");
+// The magazine scrolls normally. Only the full-screen booster locks gestures.
 const preventViewportGesture = (event) => {
-  if (event.cancelable) event.preventDefault();
+  if (event.type === "touchmove" && event.target.closest(".collection")) return;
+  if (dialog.open && event.cancelable) event.preventDefault();
 };
-for (const name of [
-  "gesturestart",
-  "gesturechange",
-  "gestureend",
-  "touchmove",
-  "dblclick",
-]) {
-  document.addEventListener(name, preventViewportGesture, { passive: false });
+for (const name of ["gesturestart", "gesturechange", "gestureend", "touchmove", "dblclick"]) {
+  dialog.addEventListener(name, preventViewportGesture, { passive: false });
 }
-document.addEventListener(
-  "touchstart",
-  (event) => {
-    if (event.touches.length > 1) preventViewportGesture(event);
-  },
-  { passive: false },
-);
+dialog.addEventListener("touchstart", (event) => {
+  if (event.touches.length > 1) preventViewportGesture(event);
+}, { passive: false });
+let returnScroll = 0, session = 0;
+const openSpecial = root.querySelector(".open-special");
+openSpecial.addEventListener("click", () => {
+  session++;
+  returnScroll = window.scrollY;
+  dialog.showModal();
+  document.body.style.top = `-${returnScroll}px`;
+  document.body.classList.add("booster-open");
+  if (state === "sealed") booster.focus({ preventScroll: true });
+  else space.querySelector(".card")?.focus({ preventScroll: true });
+});
+dialog.querySelector(".close-booster").addEventListener("click", () => dialog.close());
+dialog.addEventListener("close", () => {
+  session++;
+  rotationCleanup?.();
+  resetPackGesture();
+  space.classList.remove("leaving");
+  state = "sealed";
+  reveal.classList.remove("is-collection");
+  reveal.hidden = true;
+  booster.hidden = false;
+  booster.disabled = false;
+  booster.classList.remove("opening");
+  app.classList.remove("fairy");
+  collection.hidden = true;
+  replay.hidden = true;
+  document.body.classList.remove("booster-open");
+  document.body.style.top = "";
+  window.scrollTo({ top: returnScroll, behavior: "instant" });
+  openSpecial.focus({ preventScroll: true });
+});
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
 let state = "sealed",
   index = 0,
   rotationCleanup;
 const delay = (ms) =>
   new Promise((resolve) => setTimeout(resolve, reduced.matches ? 30 : ms));
-const cardURL = (card) => `/assets/cards/${card.id}.webp`;
-cards.forEach((card) => {
+const cardURL = (card) => card.image || `/assets/cards/${card.id}.webp`;
+openSpecial.addEventListener("pointerenter", preloadCards, { once: true });
+openSpecial.addEventListener("click", preloadCards, { once: true });
+function preloadCards() { cards.forEach((card) => {
   const img = new Image();
   img.src = cardURL(card);
-});
+}); }
 
 app.innerHTML = `<div class="ambience" aria-hidden="true"></div>
   <div class="scene">
-    <button class="booster" aria-label="Abrir pacote de quatro cartas. Toque ou arraste o lacre.">
+    <button class="booster" aria-label="Abrir pacote de ${cards.length} cartas. Toque ou arraste o lacre.">
       <span class="seal" aria-hidden="true"></span>
       <span class="pack-body" aria-hidden="true"><span class="edition"></span><span class="pack-ball"></span><span class="pack-foot"></span></span>
     </button>
@@ -83,12 +117,14 @@ function resetPackGesture() {
   booster.style.setProperty("--tear", "0px");
 }
 async function openPack() {
+  const currentSession = session;
   if (state !== "sealed") return;
   state = "opening";
   booster.disabled = true;
   resetPackGesture();
   booster.classList.add("opening");
   await delay(1100);
+  if (!dialog.open || currentSession !== session) return;
   booster.hidden = true;
   reveal.hidden = false;
   index = 0;
@@ -98,30 +134,36 @@ function cardMarkup(card) {
   return `<div class="card-enter"><div class="card ${card.id}" tabindex="0" role="button" aria-label="${card.name}. Um toque avança; dois toques ativam ou desativam a rotação. No teclado: Enter avança, espaço alterna rotação e setas giram." aria-pressed="false" aria-disabled="true"><div class="card-face front"><img src="${cardURL(card)}" alt="Carta Full Art de ${card.name}, fotografia original" draggable="false"><div class="foil" aria-hidden="true"></div><div class="glare" aria-hidden="true"></div></div><div class="card-face back"><img src="/assets/cards/back.jpg" alt="Verso Pokémon" draggable="false"><div class="glare" aria-hidden="true"></div></div></div></div>`;
 }
 async function showCard() {
+  const currentSession = session;
   state = "revealing";
   rotationCleanup?.();
-  if (index === 3) app.classList.add("fairy");
+  if (index === cards.length - 1) app.classList.add("fairy");
   else app.classList.remove("fairy");
   space.innerHTML = cardMarkup(cards[index]);
-  caption.innerHTML = `<span class="counter">${String(index + 1).padStart(3, "0")} / 004</span><strong>${cards[index].name}</strong><span class="counter">${cards[index].type} · FULL ART</span>`;
+  caption.innerHTML = `<span class="counter">${String(index + 1).padStart(3, "0")} / ${String(cards.length).padStart(3, "0")}</span><strong>${cards[index].name}</strong><span class="counter">${cards[index].type} · FULL ART</span>`;
   bindTilt(space.querySelector(".card"));
-  await delay(index === 3 ? 900 : 600);
+  await delay(index === cards.length - 1 ? 900 : 600);
+  if (!dialog.open || currentSession !== session) return;
   state = "card";
   space.querySelector(".card").setAttribute("aria-disabled", "false");
+  space.querySelector(".card").focus({ preventScroll: true });
 }
 async function advanceCard() {
+  const currentSession = session;
   if (state === "collection") {
     index = (index + 1) % cards.length;
     await showCard();
+    if (!dialog.open || currentSession !== session) return;
     state = "collection";
     updateSelection();
     return;
   }
   if (state !== "card") return;
-  if (index === 3) return finish();
+  if (index === cards.length - 1) return finish();
   state = "transition";
   space.classList.add("leaving");
   await delay(280);
+  if (!dialog.open || currentSession !== session) return;
   index++;
   space.classList.remove("leaving");
   await showCard();
@@ -142,6 +184,7 @@ function finish() {
     .join("");
 }
 collection.addEventListener("click", async (event) => {
+  const currentSession = session;
   const button = event.target.closest("button");
   if (!button || state === "revealing") return;
   index = Number(button.dataset.index);
@@ -149,6 +192,7 @@ collection.addEventListener("click", async (event) => {
     .querySelectorAll("button")
     .forEach((b) => b.setAttribute("aria-pressed", b === button));
   await showCard();
+  if (!dialog.open || currentSession !== session) return;
   state = "collection";
 });
 replay.addEventListener("click", () => {

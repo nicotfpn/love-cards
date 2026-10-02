@@ -1,0 +1,18 @@
+{
+  "name": "Nicole",
+  "nickname": "paixão",
+  "cover": { "src": "/assets/photos/nicole.jpeg", "alt": "Nicole com seu cabelo rosa", "position": "51% 38%" },
+  "note": "Eu queria te dar uma coisa que tu pudesse guardar. Aí fiz isso aqui. Um pouquinho de ti, dos nossos bichinhos e do quanto eu gosto de te chamar de paixão.",
+  "moments": [],
+  "interview": [
+    { "question": "Quem merece a capa?", "answer": "Tu. E nem teve votação." },
+    { "question": "Qual é a trilha sonora?", "answer": "Jorge Ben Jor, Djavan e tu escolhendo a próxima." },
+    { "question": "Uma coisa que eu não canso de dizer?", "answer": "Paixão. Só pra tu olhar pra mim." }
+  ],
+  "pets": [
+    { "name": "Salem", "src": "/assets/photos/salem.png", "alt": "Salem", "position": "50% 48%", "note": "Nosso tipo Dark." },
+    { "name": "Furrencio", "src": "/assets/photos/furrencio.png", "alt": "Furrencio", "position": "70% 72%", "note": "Nosso tipo Psíquico." },
+    { "name": "Theo", "src": "/assets/photos/theo.jpeg", "alt": "Theo", "position": "50% 50%", "note": "Nosso tipo Normal." }
+  ],
+  "closing": "Feliz aniversário, paixão. Eu te amo."
+}
