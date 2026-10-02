@@ -11,6 +11,7 @@ export function renderMagazine(root) {
       <h1>Feliz aniversário,<br><em>amor da minha vida!</em></h1>
       <div class="cover-composition"><div class="cover-photo cover-cutout"><img src="${escape(content.cover.src)}" alt="${escape(content.cover.alt)}" style="clip-path:url(#scissors-${escape(content.cover.cutout)})" fetchpriority="high" width="${content.cover.width}" height="${content.cover.height}"></div></div>
     </header>
+    <section class="intro-letter paper-page" aria-label="Um texto para Nicole"><span class="intro-mark" aria-hidden="true">♡</span><p>${escape(content.intro)}</p><span class="intro-initials" aria-hidden="true">N + N</span></section>
     <section class="moments" aria-label="Nossas fotografias">${content.moments.map((item, i) => `<div class="moment paper-page moment-${i % 2} layout-${escape(item.layout)}">${photo(item, item.cutout ? 'subject-cutout' : 'whole-photo')}${item.note ? `<p class="moment-note">${escape(item.note)}</p>` : ''}</div>`).join('')}</section>
     <footer class="finale paper-page"><p class="closing-note">${escape(content.closing)}</p><p class="signature">${escape(content.signature)}</p><button class="open-special booster" type="button" aria-label="Booster edição especial. Abrir a tela do pacote."><span class="seal" aria-hidden="true"></span><span class="pack-body" aria-hidden="true"><span class="edition"></span><span class="pack-ball"></span><span class="pack-foot"></span></span></button></footer>
   </article>`;

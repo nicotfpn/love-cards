@@ -23,6 +23,10 @@ button:focus-visible { outline: 2px solid var(--wine); outline-offset: 5px; }
 .cover-composition { padding-top: 32px; }
 .cover-photo { width: 100%; transform: rotate(-3deg); filter: drop-shadow(2px 0 0 #fffcf4) drop-shadow(-2px 0 0 #fffcf4) drop-shadow(0 2px 0 #fffcf4) drop-shadow(0 -2px 0 #fffcf4) drop-shadow(3px 7px 3px #3923181a); }
 .cover-photo img { display: block; width: 100%; height: auto; }
+.intro-letter { margin: 14px 25px 0; padding: 44px 29px 48px; background: #eadfce; border-top: 1px solid #782c3a40; border-bottom: 1px solid #782c3a40; transform: rotate(-1.2deg); }
+.intro-letter p { margin: 0; color: var(--wine); font-family: 'Iowan Old Style', Georgia, serif; font-size: clamp(22px, 5.7vw, 31px); line-height: 1.45; letter-spacing: -.025em; }
+.intro-mark { position: absolute; top: 14px; right: 26px; color: var(--wine); font-family: Georgia, serif; font-size: 30px; }
+.intro-initials { position: absolute; right: 28px; bottom: 13px; color: #782c3a99; font-family: 'Segoe Print', cursive; font-size: 17px; transform: rotate(-8deg); }
 .moments { padding: 12px 25px 0; }
 .moment { display: flow-root; position: relative; padding: 0; margin: 65px 0 0; }
 .pasted-photo { position: relative; }
@@ -72,6 +76,7 @@ button:focus-visible { outline: 2px solid var(--wine); outline-offset: 5px; }
   .paper-page { padding-left: 48px; padding-right: 48px; }
   .cover { padding-top: 65px; }
   .cover-composition { padding-top: 40px; }
+  .intro-letter { margin-left: 48px; margin-right: 48px; padding-left: 45px; padding-right: 45px; }
   .moments { padding-left: 48px; padding-right: 48px; }
   .moments .moment { padding: 0; }
   .moments .moment { margin-top: 85px; }
