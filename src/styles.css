@@ -17,8 +17,29 @@
 * {
   box-sizing: border-box;
 }
+html,
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+body {
+  position: fixed;
+  inset: 0;
+}
+:root {
+  --viewport-height: 100svh;
+}
+@supports (height: 100dvh) {
+  :root {
+    --viewport-height: 100dvh;
+  }
 }
 button {
   font: inherit;
@@ -35,7 +56,8 @@ button:focus-visible,
   display: none !important;
 }
 #app {
-  min-height: 100svh;
+  height: var(--viewport-height);
+  min-height: 0;
   overflow: hidden;
   position: relative;
   isolation: isolate;
@@ -68,18 +90,20 @@ button:focus-visible,
     radial-gradient(ellipse at 50% 42%, #593f7170, transparent 65%), #081427;
 }
 .scene {
-  min-height: 100svh;
+  height: var(--viewport-height);
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: max(22px, env(safe-area-inset-top)) 16px
-    max(22px, env(safe-area-inset-bottom));
+  padding: max(22px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right)) max(22px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
 }
 .booster {
   --tear: 0px;
   position: relative;
   width: min(68vw, 285px);
-  height: min(110vw, 450px);
+  height: min(110vw, 450px, calc(var(--viewport-height) - 100px));
   border: 0;
   background: none;
   touch-action: none;
@@ -123,6 +147,7 @@ button:focus-visible,
   mix-blend-mode: screen;
 }
 .edition {
+  min-height: 39px;
   width: 100%;
   padding: 13px 0;
   background: #e9edf2;
@@ -182,6 +207,7 @@ button:focus-visible,
   z-index: 2;
 }
 .pack-foot {
+  min-height: 39px;
   position: absolute;
   bottom: 0;
   background: #d1dce9;
@@ -247,6 +273,9 @@ button:focus-visible,
   z-index: 5;
   animation: light 0.8s forwards;
 }
+.reveal.is-collection {
+  --controls-room: 310px;
+}
 .reveal {
   width: 100%;
   max-width: 460px;
@@ -255,7 +284,17 @@ button:focus-visible,
   align-items: center;
 }
 .card-space {
-  width: min(82vw, 350px, calc((100svh - 238px) * 0.71965));
+  width: min(
+    82vw,
+    350px,
+    calc(
+      (
+          var(--viewport-height) - var(--controls-room, 260px) -
+            env(safe-area-inset-top) - env(safe-area-inset-bottom)
+        ) *
+        0.71965
+    )
+  );
   perspective: 1200px;
   transition:
     opacity 0.25s,
@@ -502,7 +541,16 @@ button:focus-visible,
     gap: 12px 28px;
   }
   .card-space {
-    width: min(38vw, calc((100svh - 50px) * 0.71965));
+    width: min(
+      38vw,
+      calc(
+        (
+            var(--viewport-height) - 50px - env(safe-area-inset-top) -
+              env(safe-area-inset-bottom)
+          ) *
+          0.71965
+      )
+    );
     grid-row: 1/6;
     justify-self: center;
   }

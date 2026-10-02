@@ -2,6 +2,26 @@ import "./styles.css";
 import cards from "./data/cards.json";
 
 const app = document.querySelector("#app");
+// This is a full-screen touch scene: gestures manipulate the pack/cards only.
+const preventViewportGesture = (event) => {
+  if (event.cancelable) event.preventDefault();
+};
+for (const name of [
+  "gesturestart",
+  "gesturechange",
+  "gestureend",
+  "touchmove",
+  "dblclick",
+]) {
+  document.addEventListener(name, preventViewportGesture, { passive: false });
+}
+document.addEventListener(
+  "touchstart",
+  (event) => {
+    if (event.touches.length > 1) preventViewportGesture(event);
+  },
+  { passive: false },
+);
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
 let state = "sealed",
   index = 0,
@@ -19,7 +39,7 @@ app.innerHTML = `<div class="ambience" aria-hidden="true"></div>
   <div class="scene">
     <button class="booster" aria-label="Abrir pacote de quatro cartas. Toque ou arraste o lacre.">
       <span class="seal" aria-hidden="true"></span>
-      <span class="pack-body"><span class="edition">POKÉMON · FAN COLLECTION</span><span class="pack-title">FULL<br><b>ART</b></span><span class="pack-ball" aria-hidden="true"></span><span class="pack-series">THEO / SALEM / FURRENCIO / NICOLE</span><span class="pack-foot">4 CARTAS ADICIONAIS</span></span>
+      <span class="pack-body" aria-hidden="true"><span class="edition"></span><span class="pack-ball"></span><span class="pack-foot"></span></span>
     </button>
     <section class="reveal" hidden aria-label="Cartas da coleção">
       <div class="card-space"></div><div class="inspect-controls"><button class="flip">Virar ↔</button><span>ARRASTE PARA GIRAR</span><button class="reset">Centralizar</button></div>
@@ -113,6 +133,7 @@ next.addEventListener("click", async () => {
 });
 function finish() {
   state = "collection";
+  reveal.classList.add("is-collection");
   next.hidden = true;
   collection.hidden = false;
   replay.hidden = false;
@@ -139,6 +160,7 @@ replay.addEventListener("click", () => {
   sensorCleanup = undefined;
   rotationCleanup?.();
   state = "sealed";
+  reveal.classList.remove("is-collection");
   reveal.hidden = true;
   booster.hidden = false;
   booster.disabled = false;

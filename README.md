@@ -14,7 +14,8 @@ Na Vercel, importe o repositório usando Vite, build `npm run build` e saída `d
 
 ## Interação
 
-- O pacote aparece diretamente. Toque ou arraste o lacre para abrir.
+- O pacote aparece diretamente, sem textos, mantendo as cores e a Poké Bola. Toque ou arraste o lacre para abrir.
+- A cena ocupa o viewport dinâmico, respeita as áreas seguras e bloqueia rolagem, seleção de texto e zoom por gestos. A coleção também cabe na tela fixa.
 - Arraste a carta em qualquer direção para girar continuamente em X e Y, inclusive mostrar o verso. Um movimento horizontal da largura da carta equivale a uma volta completa.
 - Ao soltar, há uma pequena desaceleração; a carta permanece na posição escolhida. Segurar antes de soltar evita a inércia.
 - Virar alterna frente/verso; Centralizar restaura a frente. As setas do teclado também giram a carta.
