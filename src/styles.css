@@ -274,7 +274,7 @@ button:focus-visible,
   animation: light 0.8s forwards;
 }
 .reveal.is-collection {
-  --controls-room: 310px;
+  --controls-room: 200px;
 }
 .reveal {
   width: 100%;
@@ -289,7 +289,7 @@ button:focus-visible,
     350px,
     calc(
       (
-          var(--viewport-height) - var(--controls-room, 260px) -
+          var(--viewport-height) - var(--controls-room, 130px) -
             env(safe-area-inset-top) - env(safe-area-inset-bottom)
         ) *
         0.71965
@@ -591,3 +591,8 @@ button:focus-visible,
     opacity: 0;
   }
 }
+
+.card { cursor: pointer; }
+.card.inspecting { cursor: grab; }
+.card.inspecting.active { cursor: grabbing; }
+.card-space { touch-action: none; }

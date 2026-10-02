@@ -16,12 +16,13 @@ Na Vercel, importe o repositório usando Vite, build `npm run build` e saída `d
 
 - O pacote aparece diretamente, sem textos, mantendo as cores e a Poké Bola. Toque ou arraste o lacre para abrir.
 - A cena ocupa o viewport dinâmico, respeita as áreas seguras e bloqueia rolagem, seleção de texto e zoom por gestos. A coleção também cabe na tela fixa.
-- Arraste a carta em qualquer direção para girar continuamente em X e Y, inclusive mostrar o verso. Um movimento horizontal da largura da carta equivale a uma volta completa.
-- Ao soltar, há uma pequena desaceleração; a carta permanece na posição escolhida. Segurar antes de soltar evita a inércia.
-- Virar alterna frente/verso; Centralizar restaura a frente. As setas do teclado também giram a carta.
-- Foil e reflexo respondem à orientação. Movimento do celular é opcional e depende de suporte e permissão do navegador; o arraste funciona sozinho.
-- Próxima carta avança até Nicole. No fim, as miniaturas permitem rever as quatro cartas e abrir o pacote novamente.
-- Movimento reduzido desativa as animações automáticas e a inércia, preservando a rotação manual.
+- Um toque na carta avança para a próxima. Há uma janela de 280 ms para reconhecer dois toques sem avançar por engano.
+- Dois toques ativam ou desativam a inspeção. Nesse modo, arraste para girar livremente, com frente, verso e inércia; arrastar não avança.
+- Um toque sem arrastar também avança quando a inspeção está ativa. Cada nova carta começa de frente, com a rotação desativada.
+- Não há instruções de gesto nem botões de girar/avançar na tela. Nome, tipo e número permanecem abaixo da carta.
+- No teclado: Enter avança, espaço alterna inspeção, setas giram durante a inspeção e Escape restaura a frente.
+- Um toque na última carta abre as miniaturas da coleção. O botão de reabrir aparece somente no final.
+- Movimento reduzido desativa animações automáticas e inércia, preservando o giro manual.
 
 ## Editar textos e imagens
 
@@ -45,4 +46,4 @@ O código de rotação e foil é próprio. Referência visual: [Pokémon Cards C
 
 ## Verificação
 
-Build de produção com Vite. Fluxo verificado em Chromium com viewports 390×844, 320×568 e 844×390: abertura, quatro revelações, arraste touch além de 250°, frente/verso, centralização, coleção e replay. Rotação por teclado também verificada com movimento reduzido. Sensores físicos e Safari em iPhone ainda precisam de teste em aparelhos reais.
+Build de produção com Vite. Gestos verificados em Chromium mobile: toque simples avança, toque duplo mantém a carta e ativa inspeção, arraste gira além de 180° sem avançar, próxima carta restaura a frente, coleção e replay funcionam. Bloqueio de rolagem e zoom previamente verificado em três tamanhos de tela. Safari em iPhone ainda precisa de teste em aparelho real.
