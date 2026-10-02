@@ -13,9 +13,9 @@ body { margin: 0; min-width: 280px; }
 button { -webkit-tap-highlight-color: transparent; }
 button:focus-visible { outline: 2px solid var(--wine); outline-offset: 5px; }
 #app { width: 100%; overflow: clip; }
-.magazine { max-width: 680px; margin: 0 auto; background: var(--paper); }
+.magazine { max-width: 680px; margin: 0 auto; background-color: var(--paper); background-image: url('/assets/paper-grain.svg'), linear-gradient(90deg, #b79d7010, transparent 15% 85%, #b79d7012); background-size: 180px 180px, 100% 100%; }
 .magazine h1, .magazine p, .magazine figure { margin: 0; }
-.paper-page { position: relative; padding: 28px 25px; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' opacity='.025' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
+.paper-page { position: relative; padding: 28px 25px; }
 .scissors-defs { position: absolute; pointer-events: none; }
 .cover { padding-top: max(55px, env(safe-area-inset-top)); padding-bottom: 15px; }
 .cover h1 { max-width: 16ch; margin: 0 auto; font-family: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif; font-size: clamp(31px, 8.3vw, 51px); font-weight: 400; letter-spacing: -.055em; line-height: 1.12; color: var(--wine); text-align: center; }
@@ -23,26 +23,31 @@ button:focus-visible { outline: 2px solid var(--wine); outline-offset: 5px; }
 .cover-composition { padding-top: 32px; }
 .cover-photo { width: 100%; transform: rotate(-3deg); filter: drop-shadow(2px 0 0 #fffcf4) drop-shadow(-2px 0 0 #fffcf4) drop-shadow(0 2px 0 #fffcf4) drop-shadow(0 -2px 0 #fffcf4) drop-shadow(3px 7px 3px #3923181a); }
 .cover-photo img { display: block; width: 100%; height: auto; }
-.moments { display: grid; grid-template-columns: repeat(12, 1fr); padding: 24px 25px 0; align-items: start; }
-.moment { padding: 0; position: relative; min-width: 0; }
-.pasted-photo { position: relative; width: 100%; }
+.moments { padding: 12px 25px 0; }
+.moment { display: flow-root; position: relative; padding: 0; margin: 65px 0 0; }
+.pasted-photo { position: relative; }
 .pasted-photo img { display: block; width: 100%; height: auto; }
 .subject-cutout { filter: drop-shadow(2px 0 0 #fffcf4) drop-shadow(-2px 0 0 #fffcf4) drop-shadow(0 2px 0 #fffcf4) drop-shadow(0 -2px 0 #fffcf4) drop-shadow(3px 7px 3px #3923181a); }
-.layout-portrait { grid-column: 6 / 13; grid-row: 1; margin-top: 18px; }
-.layout-portrait .pasted-photo { transform: rotate(6deg); }
-.layout-wide { grid-column: 1 / 12; grid-row: 2; margin-top: -53px; z-index: 2; }
-.layout-wide .pasted-photo { transform: rotate(-5deg); }
-.layout-kiss { grid-column: 1 / 9; grid-row: 3; margin-top: 88px; }
-.layout-kiss .pasted-photo { transform: rotate(-6deg); }
-.layout-together { grid-column: 6 / 13; grid-row: 4; margin-top: -100px; z-index: 2; }
-.layout-together .pasted-photo { transform: rotate(7deg); }
-.layout-jersey { grid-column: 2 / 12; grid-row: 5; margin-top: 100px; }
-.layout-jersey .pasted-photo { transform: rotate(-4deg); }
-.moment-note { max-width: 24ch; margin: 35px auto 10px !important; font-family: 'Iowan Old Style', Georgia, serif; text-align: center; font-size: 24px; line-height: 1.25; color: var(--wine); }
-.finale { padding: 75px 25px max(65px, env(safe-area-inset-bottom)); }
-.open-special { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 auto; width: 100%; max-width: 360px; min-height: 58px; padding: 15px 19px; border: 1px solid var(--wine); background: transparent; color: var(--wine); font-size: 15px; border-radius: 0; transition: background .2s, color .2s; }
-.open-special:hover { color: var(--paper); background: var(--wine); }
-.open-special > span:last-child { font-size: 23px; }
+.whole-photo { padding: 6px; background: #fffcf4; box-shadow: 2px 5px 8px #39231826; }
+.moment-note { font-family: 'Iowan Old Style', Georgia, serif; font-size: clamp(18px, 4.7vw, 24px); line-height: 1.65; letter-spacing: -.025em; color: var(--wine); text-align: left; }
+.layout-portrait { display: grid; grid-template-columns: 45% 55%; align-items: center; }
+.layout-portrait .pasted-photo { grid-column: 2; grid-row: 1; transform: rotate(7deg); }
+.layout-portrait .moment-note { grid-column: 1; grid-row: 1; font-size: clamp(24px, 6.3vw, 37px); font-style: italic; line-height: 1.35; padding-bottom: 35px; }
+.layout-wide { padding-top: 20px; }
+.layout-wide .pasted-photo { width: 88%; margin-left: 2%; transform: rotate(-5deg); }
+.layout-wide .moment-note { width: 76%; margin: 35px 0 0 auto; padding: 0 0 0 18px; border-left: 1px solid #782c3a40; }
+.layout-kiss { padding: 12px 3px 4px; }
+.layout-kiss .pasted-photo { width: 46%; float: right; margin: 6px 0 20px 22px; transform: rotate(5deg); }
+.layout-kiss .moment-note { padding-top: 28px; }
+.layout-together { padding: 15px 0 0; }
+.layout-together .pasted-photo { width: 46%; float: left; margin: 4px 22px 18px 0; transform: rotate(-6deg); }
+.layout-together .moment-note { padding-top: 22px; }
+.layout-jersey { padding: 18px 0 15px; }
+.layout-jersey .pasted-photo { width: 48%; float: right; margin: 8px 0 18px 20px; transform: rotate(5deg); }
+.layout-jersey .moment-note { padding-top: 35px; }
+.finale { padding: 65px 25px max(65px, env(safe-area-inset-bottom)); }
+.open-special.booster { display: block; width: min(58vw, 240px); height: min(94vw, 380px); margin: 0 auto; padding: 0; border: 0; background: none; touch-action: pan-y; filter: drop-shadow(0 18px 15px #49322133); }
+.open-special.booster:hover { background: none; }
 .booster-open { position: fixed; width: 100%; overflow: hidden; overscroll-behavior: none; }
 .booster-dialog { position: fixed; inset: 0; width: 100%; max-width: none; height: var(--viewport-height); max-height: none; margin: 0; padding: 0; border: 0; background: #081427; color: #eaf0fa; font-family: Gill, Arial, sans-serif; touch-action: none; overflow: hidden; overscroll-behavior: none; color-scheme: dark; }
 .booster-dialog::backdrop { background: #081427; }
@@ -69,24 +74,13 @@ button:focus-visible { outline: 2px solid var(--wine); outline-offset: 5px; }
   .cover-composition { padding-top: 40px; }
   .moments { padding-left: 48px; padding-right: 48px; }
   .moments .moment { padding: 0; }
-  .layout-together { margin-top: -160px; }
+  .moments .moment { margin-top: 85px; }
 }
 @media (max-width: 350px) { .paper-page { padding-left: 20px; padding-right: 20px; } .moments { padding-left: 20px; padding-right: 20px; } .moments .moment { padding: 0; } }
 @media (max-height: 580px) and (orientation: landscape) {
   .booster-dialog .card-space { width: min(38vw, calc((var(--viewport-height) - 75px) * .71965)); }
 }
 
-/* Photographs and Nico's own letter share the page without scroll effects. */
-.moments .moment { grid-column: 1 / 13; grid-row: auto; margin-top: 65px; }
-.moments .layout-portrait .pasted-photo { width: 62%; margin-left: auto; }
-.moments .layout-wide .pasted-photo { width: 100%; }
-.moments .layout-kiss .pasted-photo { width: 78%; }
-.moments .layout-together .pasted-photo { width: 79%; margin-left: auto; }
-.moments .layout-jersey .pasted-photo { width: 87%; margin: 0 auto; }
-.whole-photo { padding: 7px; background: #fffcf4; box-shadow: 3px 6px 9px #39231820; }
-.whole-photo img { height: auto; object-fit: contain; }
-.moment-note { max-width: 31ch; margin-top: 42px !important; font-size: clamp(20px, 5.3vw, 26px); line-height: 1.55; text-align: left; letter-spacing: -.02em; }
-.layout-portrait .moment-note { color: var(--wine); font-style: italic; font-size: clamp(27px, 7vw, 35px); max-width: 19ch; }
 .closing-note { color: var(--wine); font-family: Georgia, serif; font-style: italic; font-size: 28px; text-align: center; }
 .signature { color: var(--wine); font-family: Georgia, serif; font-style: italic; font-size: 25px; text-align: right; margin: 20px 18px 55px !important; }
 .card .photo-print .original-photo { position: absolute; left: 4.2%; top: 14%; width: 91.6%; height: 72%; object-fit: contain; object-position: center; }
@@ -105,3 +99,6 @@ button:focus-visible { outline: 2px solid var(--wine); outline-offset: 5px; }
 @keyframes rare-sweep { to { transform: translateX(75%); } }
 @keyframes rare-twinkle { 0%, 65%, 100% { opacity: 0; transform: scale(.4) rotate(-12deg); } 25%, 38% { opacity: .9; transform: scale(1) rotate(8deg); } }
 @media (prefers-reduced-motion: reduce) { .rare-sweep, .rare-stars { display: none; } .card.nicole .foil { animation: none; } }
+
+.moments .moment { padding-left: 0; padding-right: 0; }
+@media (max-width: 350px) { .moment-note { font-size: 17px; } .layout-kiss .pasted-photo, .layout-together .pasted-photo { width: 43%; } }

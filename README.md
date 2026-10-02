@@ -14,6 +14,8 @@ Vercel: framework Vite, build `npm run build`, saída `dist`. O QR Code continua
 
 ## Composição e conteúdo
 
+Fotos alternam entre os cantos, com texto ao lado. O fundo usa uma textura SVG de papel. O próprio booster flutuante no rodapé abre a cena em tela cheia.
+
 A revista rola normalmente. As fotografias ficam visíveis desde o início, sem animações de entrada, observadores de rolagem ou efeitos de parallax. Os contornos foram traçados à mão em SVG e aplicados às fotografias por clip-path: os pixels das fotos e os rostos não são redesenhados.
 
 As seis imagens ficam em `public/assets/photos/momento-1362.jpeg` até `momento-1367.jpeg`. Capa e colagens usam `src/data/magazine.json`; contornos usam `src/data/cutouts.json`. O campo `note` de cada fotografia contém somente o texto fornecido por Nico. Campos vazios não produzem legendas nem espaços reservados.
